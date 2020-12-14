@@ -1,0 +1,162 @@
+void LListInt::insert(int loc, const int& val)
+{
+	if (head == NULL)//If ITEM list is empty
+    {
+        cout<<"Error"<<endl;
+        return;
+    }
+	else
+	{
+		Item->prev = NULL;
+		Item->value = val;
+		Item->next = head;
+		head->prev = Item;
+		return;
+	}
+	//Inserting at a specific position in ITEM list or
+	//Inserting at the end of Item list
+	struct Item *temp, *b;
+	b = head;
+	for (int i = 0;i < loc-1;i++)
+    {
+        b = b->next;
+        if (b == NULL)//if number entered is out of bounds
+        {
+            //cout<<"There are less than ";
+            //cout<<loc<<" elements."<<endl;
+            return;
+        }
+    }
+	temp = new(struct node);
+	//adjusting pointers
+	temp->value = val;
+	 if (b->next == NULL)//if end of list
+    {
+        b->next = temp;
+        temp->next = NULL;
+        temp->prev = b;      
+    }
+    else
+    {
+        temp->next = b->next;
+        temp->next->prev = temp;
+        b->next = temp;
+        temp->prev = b;
+    }
+	
+
+}
+
+void LListInt::remove(int loc)
+{
+	//temporary nodes
+	struct node *temp, *b;
+     //deleting from the first element
+    if (loc == 1)//if it is the first element
+    {
+        temp = head;
+        head = head->next;  
+        head->prev = NULL;
+        delete temp;
+        return;
+    }
+	//with return statement this wont always be executed
+	b = head;
+	for(int k = 0; k <= loc; k++)
+	{
+		if(k == loc)//at the proper location for deletion
+		{
+			if (b->next->next != NULL)//making sure not near the end of ITEM list
+			{
+				if(b->next->value ==loc)
+				{
+					temp = head;
+					head = head->next;
+					head->prev = NULL;
+					delete temp;
+					return;
+				}
+			}
+		}
+	}
+	//if above didnt go then picked last element
+        temp = b->next;
+        delete temp;
+        b->next = NULL;
+        return;
+}
+
+void LListInt::set(int loc, const int& val)
+{
+  Item *temp = getNodeAt(loc);
+  temp->val = val;
+}
+
+int& LListInt::get(int loc)
+{
+  if(loc < 0 || loc >= size_){
+    throw std::invalid_argument("bad location");
+  }
+  Item *temp = getNodeAt(loc);
+  return temp->val;
+}
+
+int const & LListInt::get(int loc) const
+{
+  if(loc < 0 || loc >= size_){
+    throw std::invalid_argument("bad location");
+  }
+  Item *temp = getNodeAt(loc);
+  return temp->val;
+}
+
+void LListInt::clear()
+{
+  while(head_ != NULL){
+    Item *temp = head_->next;
+    delete head_;
+    head_ = temp;
+  }
+  tail_ = NULL;
+  size_ = 0;
+}
+
+LListInt::Item* LListInt::getNodeAt(int loc) const
+{
+	struct node *temp;
+     //selecting from the first element
+    if (loc == 1)//if it is the first element
+    {
+        temp = head;
+        head = head->next;  
+        head->prev = NULL;
+        delete temp;
+        return;
+    }
+	//with return statement this wont always be executed
+	temp = head;
+	for(int k = 0; k <= loc; k++)
+	{
+		if(temp = NULL)
+		{
+			return NULL;
+		}
+		if(k == loc)//at the proper location for selection
+		{
+			if (temp->next->next != NULL)//making sure not near the end of ITEM list
+			{
+				if(temp->next->value ==loc)
+				{
+					temp = head;
+					head = head->next;
+					head->prev = NULL;
+					return temp;
+				}
+			}
+		}
+	}
+	//if above didnt go then picked last element
+        temp = b->next;
+        return temp;
+
+}
