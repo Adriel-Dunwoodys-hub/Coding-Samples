@@ -1,0 +1,25 @@
+Problem 2
+1. A Linked List structs that holds the histories and their position in the list
+	is their number in the initial subject pool.
+2. A bag of strings where the strings are the names of the people who have gotten an A
+	in the class. Use a set becase order doesn't matter and you also don't know how many
+	will meet the requirement.
+3. A List of strings where the strings are the students name. As we don't know how many
+	an array would not be ideal. Also most students will have duplicate names
+	so a List can overlook find all students with that name and print it out.
+4. A List of students and each student has a grade variable. Search through the list
+	and print all students from the list that have the searched grade.
+
+
+Problem 3
+part(a)
+This is in order of Theta(n). because the innermost loop never actually does anything because of the k <=j and the next outer loop also never does anything because it can never get there again when j is < i. the outermost loop will just go to n doing nothing which makes it theta(n).
+
+part(b)
+Is theta(1/n) because of how i grows with i*2 every loop to n and the func will be called theta(n) times.
+
+part(c)
+theta(n^3) because the innermost for loop goes from j to n by 1 which is n times. that loop will occur based on the if statement and since curr->data is just i it will go inside the if statement everytime, and the while loop occurs the size of the list which is size n. Making it go to n and the outermost loop also goes to n which makes it n*n*n which is n^3.
+
+part(d)
+this is theta(n) because it takes about n fill ups to reach the max before it has to do n^2 work to fill it back up again and it doubles it size.
